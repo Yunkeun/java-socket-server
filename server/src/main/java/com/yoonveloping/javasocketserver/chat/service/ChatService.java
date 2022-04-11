@@ -1,5 +1,7 @@
 package com.yoonveloping.javasocketserver.chat.service;
 
+import com.yoonveloping.javasocketserver.database.FileService;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -7,10 +9,12 @@ public class ChatService {
 
 	private String name;
 	private final List<PrintWriter> writerList;
+	private final FileService fileService;
 	private static final String REQUEST_SPLIT_REGEX = ":";
 
-	public ChatService(List<PrintWriter> writerList) {
+	public ChatService(List<PrintWriter> writerList, FileService fileService) {
 		this.writerList = writerList;
+		this.fileService = fileService;
 	}
 
 	public void doQuit(PrintWriter writer) {
@@ -24,6 +28,14 @@ public class ChatService {
 
 	public void doJoin(String name, PrintWriter writer) {
 		this.name = name;
+		int count = 0;
+		try {
+			count = fileService.writeFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("count = " + count);
+		broadcast(count + "번째 방문자입니다.");
 		broadcast(name + "님이 입장했습니다.");
 		addWriter(writer);
 	}

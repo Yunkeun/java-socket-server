@@ -2,6 +2,7 @@ package com.yoonveloping.javasocketserver.chat.controller;
 
 import com.yoonveloping.javasocketserver.chat.thread.ChatServerProcessThread;
 import com.yoonveloping.javasocketserver.chat.service.ChatService;
+import com.yoonveloping.javasocketserver.database.FileService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
@@ -30,7 +31,8 @@ public class ChatController {
 		throws IOException {
 		while (true) {
 			Socket socket = serverSocket.accept();
-			final ChatService chatService = new ChatService(writerList);
+			final FileService fileService = new FileService();
+			final ChatService chatService = new ChatService(writerList, fileService);
 			final ChatServerProcessThread thread = new ChatServerProcessThread(socket, chatService);
 			thread.start();
 		}
