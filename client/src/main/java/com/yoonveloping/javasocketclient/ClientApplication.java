@@ -7,6 +7,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class ClientApplication {
@@ -22,8 +23,8 @@ public class ClientApplication {
 			scanner = new Scanner(System.in);
 			socket = new Socket();
 			socket.connect(new InetSocketAddress(SERVER_IP, SERVER_PORT));
-			BufferedReader response = new BufferedReader(new InputStreamReader(socket.getInputStream(), "utf-8"));
-			PrintWriter request = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "utf-8"), true);
+			BufferedReader response = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
+			PrintWriter request = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true);
 
 			System.out.print("이름>> ");
 			String name = scanner.nextLine();
@@ -39,9 +40,8 @@ public class ClientApplication {
 				if ("quit".equals(input)) {
 					request.println("quit");
 					break;
-				} else {
-					request.println("message:" + input);
 				}
+				request.println("message:" + input);
 			}
 		} catch (IOException e) {
 			log("[client] error: " + e);
