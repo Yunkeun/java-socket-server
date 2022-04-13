@@ -25,6 +25,7 @@ public class ChatServerProcessThread extends Thread {
 			final PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8));
 			while (true) {
 				final String request = bufferedReader.readLine();
+				System.out.println(request);
 				if (request == null) {
 					System.out.println("연결 끊김");
 					chatService.doQuit(printWriter);

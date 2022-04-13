@@ -7,6 +7,7 @@ import java.net.ServerSocket;
 public class ChatServerApplication {
 
 	public static void main(String[] args) {
+
 		ServerSocket serverSocket = null;
 		try {
 			serverSocket = new ServerSocket();
@@ -23,6 +24,5 @@ public class ChatServerApplication {
 				e.printStackTrace();
 			}
 		}
-
 	}
 }

@@ -27,8 +27,7 @@ public class ChatController {
 		waitRequest(serverSocket, writerList);
 	}
 
-	private void waitRequest(ServerSocket serverSocket, List<PrintWriter> writerList)
-		throws IOException {
+	private void waitRequest(ServerSocket serverSocket, List<PrintWriter> writerList) throws IOException {
 		while (true) {
 			Socket socket = serverSocket.accept();
 			final FileService fileService = new FileService();
@@ -39,7 +38,6 @@ public class ChatController {
 	}
 
 	private void bindPortWith(ServerSocket serverSocket) throws IOException {
-//		String hostAddress = InetAddress.getLocalHost().getHostAddress();
 		String hostAddress = LOCALHOST;
 		serverSocket.bind(new InetSocketAddress(hostAddress, PORT));
 		consoleLog("연결 대기중입니다. - " + hostAddress + ": " + PORT);

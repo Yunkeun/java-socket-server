@@ -42,6 +42,9 @@ public class ChatService {
 
 	public void chat(PrintWriter printWriter, String request) {
 		final List<String> token = List.of(request.split(REQUEST_SPLIT_REGEX));
+		if (token.size() != 2) {
+			return;
+		}
 		divideByHeader(printWriter, token);
 	}
 
@@ -56,11 +59,14 @@ public class ChatService {
 			doMessage(data);
 			return;
 		}
-		doQuit(printWriter);
+		if ("quit".equals(header)) {
+			doQuit(printWriter);
+			return;
+		}
+		broadcast("EXCEPTION");
 	}
 
 	private void broadcast(String message) {
-		System.out.println("message = " + message);
 		synchronized (writerList) {
 			writerList.forEach(writer -> {
 					writer.println(message);
