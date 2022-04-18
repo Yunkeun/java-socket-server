@@ -10,7 +10,7 @@ import java.io.IOException;
 public class FileService {
 
 	private static final String REGEX = "^[0-9]*$";
-	private static final String PATH = "/src/main/resources/counter";
+	private static final String PATH = "/server/src/main/resources/counter";
 
 	public int writeFile() throws IOException {
 		String workingDirectory = calculateWorkingDirectory();
