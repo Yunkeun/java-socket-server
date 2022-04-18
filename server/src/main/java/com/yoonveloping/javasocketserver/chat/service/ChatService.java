@@ -35,9 +35,9 @@ public class ChatService {
 			e.printStackTrace();
 		}
 		System.out.println("count = " + count);
-		broadcast(count + "번째 방문자입니다.");
-		broadcast(name + "님이 입장했습니다.");
 		addWriter(writer);
+		broadcast(name + "님이 입장했습니다.");
+		broadcast(count + "번째 방문자입니다.");
 	}
 
 	public void chat(PrintWriter printWriter, String request) {
@@ -69,7 +69,7 @@ public class ChatService {
 	private void broadcast(String message) {
 		synchronized (writerList) {
 			writerList.forEach(writer -> {
-					writer.println(message);
+					writer.println(">> " + message);
 					writer.flush();
 				}
 			);

@@ -35,7 +35,6 @@ public class ClientApplication {
 			chatClientreceivethread.start();
 
 			while (true) {
-				System.out.print(">> ");
 				String input = scanner.nextLine();
 				if ("quit".equals(input)) {
 					request.println("quit");
