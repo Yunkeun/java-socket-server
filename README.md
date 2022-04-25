@@ -1,8 +1,5 @@
 # java-socket-server
-사용 언어: Java
-개발 환경: IntelliJ
-github: https://github.com/Yunkeun/java-socket-server
-빌드 및 실행 방법: 
+
 - 서버 실행 방법
 1. git clone https://github.com/Yunkeun/java-socket-server.git
 2. cd java-socket-server
